@@ -1,0 +1,33 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double input;
+    printf("실수 입력 : ");
+    if (scanf("%lf", &input) != 1) return 1;
+
+    // 1. 실수를 Q8.8 형식의 정수(16비트)로 변환
+    // -8.5 * 256 = -2176
+    // 2의 보수 표현: -2176을 16비트 signed short에 저장하면 자동 변환됨
+    short fixed_point = (short)round(input * 256.0);
+
+    // 2. 비트 패턴 출력 (16비트)
+    printf("비트 패턴: ");
+    for (int i = 15; i >= 0; i--) {
+        // MSB부터 차례대로 비트를 확인하여 출력
+        if ((fixed_point >> i) & 1)
+            printf("1");
+        else
+            printf("0");
+
+        // 8비트 정수부와 8비트 소수부 사이에 점(.) 출력
+        if (i == 8)
+            printf(".");
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
