@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <limits.h>
+
+void check_integer_representation() {
+    // 정수형 변수를 사용하여 2의 보수인지 확인합니다.
+    int num = -1;  // -1을 사용하여 비트 패턴을 확인합니다.
+
+    // 1의 보수: 모든 비트를 반전
+    unsigned int ones_complement = ~num;
+
+    // 2의 보수: 1의 보수에 1을 더함
+    unsigned int twos_complement = ones_complement + 1;
+
+    // 결과를 출력합니다.
+    if (twos_complement == (unsigned int)num) {
+        printf("2의 보수입니다.\n");
+    }
+    else {
+        printf("1의 보수입니다.\n");
+    }
+}
+
+int main() {
+    check_integer_representation();
+    return 0;
+}
