@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+void print_binary(uint32_t num, int bits) {
+    for (int i = bits - 1; i >= 0; i--) {
+        printf("%u", (num >> i) & 1);
+    }
+}
+
+void float_to_ieee754(float num) {
+    uint32_t bits;
+
+    // float를 uint32_t로 변환
+    memcpy(&bits, &num, sizeof(float));
+
+    // 부호, 지수, 가수 비트 추출
+    uint32_t sign = (bits >> 31) & 0x01;
+    uint32_t exponent = (bits >> 23) & 0xFF;
+    uint32_t mantissa = bits & 0x7FFFFF;
+
+    // 결과 출력
+    printf("%u/", sign);
+    print_binary(exponent, 8);
+    printf("/");
+    print_binary(mantissa, 23);
+    printf("\n");
+}
+
+int main() {
+    float number;
+
+    // 실수 입력 받기
+    printf("실수를 입력하세요: ");
+    scanf("%f", &number);
+
+    float_to_ieee754(number);
+
+    return 0;
+}
