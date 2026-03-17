@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+void toggle_case(char* str) {
+    int i = 0;
+    while (str[i] != '\0') {
+        // 대문자 변환
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = str[i] + ('a' - 'A'); // 대문자를 소문자로 변환
+        }
+        // 소문자 변환
+        else if (str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = str[i] - ('a' - 'A'); // 소문자를 대문자로 변환
+        }
+        // 나머지는 그대로 유지
+        i++;
+    }
+}
+
+int main() {
+    char str[100]; // 입력 문자열을 저장할 배열
+
+    // 문자열 입력 받기
+    printf("문자열을 입력하세요: ");
+    fgets(str, sizeof(str), stdin); // fgets를 사용하여 입력 받기
+
+    toggle_case(str); // 대소문자 변환
+
+    // 결과 출력
+    printf("변환된 문자열: %s", str);
+
+    return 0;
+}
